@@ -1,9 +1,11 @@
 import { Image, StyleSheet, Platform } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import InitLocalDatabase from "@/src/services/InitLocalDatabase";
+
+import { HelloWave } from "@/src/components/HelloWave";
+import ParallaxScrollView from "@/src/components/ParallaxScrollView";
+import { ThemedText } from "@/src/components/ThemedText";
+import { ThemedView } from "@/src/components/ThemedView";
 
 export default function SandboxScreen() {
   return (
@@ -17,7 +19,8 @@ export default function SandboxScreen() {
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        {/* <ThemedText type="title">Welcome!</ThemedText> */}
+        <InitLocalDatabase />
       </ThemedView>
     </ParallaxScrollView>
   );
