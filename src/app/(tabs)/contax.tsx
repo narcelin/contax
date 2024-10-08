@@ -6,6 +6,8 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
+import ShowFilteredContacts from "@/src/components/ShowFilteredContacts";
+
 const contax = () => {
   return (
     <ParallaxScrollView
@@ -15,7 +17,8 @@ const contax = () => {
     //   }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        {/* <ThemedText type="title">Explore</ThemedText> */}
+        <ShowFilteredContacts first_name="Nicolas" last_name="Arcelin" />
       </ThemedView>
     </ParallaxScrollView>
   );

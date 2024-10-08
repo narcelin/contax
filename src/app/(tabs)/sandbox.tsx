@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Platform } from "react-native";
 
-import InitLocalDatabase from "@/src/services/InitLocalDatabase";
+import InitLocalDatabase from "@/src/services/initLocalDatabaseService";
 
 import { HelloWave } from "@/src/components/HelloWave";
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";

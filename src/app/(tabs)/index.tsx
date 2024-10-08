@@ -6,7 +6,7 @@ import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
 import { useEffect } from "react";
-import { initLocalDatabaseSchema } from "@/src/services/InitLocalDatabase";
+import { initLocalDatabaseSchema } from "@/src/services/initLocalDatabaseService";
 
 export default function HomeScreen() {
   // Init Local Database Schema

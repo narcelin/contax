@@ -73,7 +73,8 @@ const schemaSql = `
     );
     `;
 
-const testData = `INSERT INTO Contacts (first_name, last_name, company, birthday) 
+const testData = `
+INSERT INTO Contacts (first_name, last_name, company, birthday) 
 VALUES 
 ('John', 'Doe', 'Acme Inc.', '1990-02-15'),
 ('Jane', 'Smith', 'Tech Corp', '1985-07-23'),
@@ -138,7 +139,8 @@ VALUES
 (1, 3),  -- Family has full access
 (2, 2),  -- Close Friends have medium access
 (3, 1),  -- Friends have minimal access
-(4, 2);  -- Work Colleagues have medium access`;
+(4, 2);  -- Work Colleagues have medium access
+`;
 
 export const initLocalDatabaseSchema = async () => {
   console.log("Running Init Local Database");
