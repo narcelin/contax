@@ -16,6 +16,18 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
+        name="contax"
+        options={{
+          title: "Contax",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "book" : "book-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="index"
         options={{
           title: "Home",
