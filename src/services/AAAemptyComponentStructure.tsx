@@ -7,29 +7,20 @@ import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
 export type ThemedShowFilteredContactsProps = {
-  first_name?: string;
-  last_name?: string;
+  some_string?: string;
 };
 
 const ShowFilteredContacts = ({
-  first_name,
-  last_name,
+  some_string,
 }: ThemedShowFilteredContactsProps) => {
   return (
     <ThemedView style={styles.titleContainer}>
-      <ThemedText type="title">{first_name}</ThemedText>
-      <ThemedText type="title">{last_name}</ThemedText>
+      <ThemedText type="title">{some_string}</ThemedText>
     </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
-  },
   titleContainer: {
     flexDirection: "row",
     gap: 8,

@@ -1,26 +1,25 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet, Pressable, Platform } from "react-native";
 
-import InitLocalDatabase from "@/src/services/initLocalDatabaseService";
+import InitLocalDatabase from "@/src/services/initLocalDatabaseServices";
 
 import { HelloWave } from "@/src/components/HelloWave";
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
+import { alphabeticalFistThenLastNames } from "@/src/services/queries/getContactsQuery";
+
 export default function SandboxScreen() {
+  const onPressHandler = async () => {
+    const result = await alphabeticalFistThenLastNames();
+    console.log(result);
+  };
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
+    <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
-        {/* <ThemedText type="title">Welcome!</ThemedText> */}
-        <InitLocalDatabase />
+        <Pressable onPress={onPressHandler}>
+          <ThemedText type="title">QUERY</ThemedText>
+        </Pressable>
       </ThemedView>
     </ParallaxScrollView>
   );

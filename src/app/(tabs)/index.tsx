@@ -6,12 +6,12 @@ import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
 import { useEffect } from "react";
-import { initLocalDatabaseSchema } from "@/src/services/initLocalDatabaseService";
+import { initLocalDatabaseSchema } from "@/src/services/initLocalDatabaseServices";
 
 export default function HomeScreen() {
   // Init Local Database Schema
   useEffect(() => {
-    console.log("use Effect Ran");
+    console.log("USE EFFECT: Init Local Databse Schema");
     initLocalDatabaseSchema();
   }, []);
 

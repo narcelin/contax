@@ -6,15 +6,16 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-export type ThemedShowFilteredContactsProps = {
+export type ThemedDisplayContactListItemProps = {
+  banners?: string[] | undefined;
   first_name?: string;
   last_name?: string;
 };
 
-const ShowFilteredContacts = ({
+const DisplayContactListItem = ({
   first_name,
   last_name,
-}: ThemedShowFilteredContactsProps) => {
+}: ThemedDisplayContactListItemProps) => {
   return (
     <ThemedView style={styles.titleContainer}>
       <ThemedText type="title">{first_name}</ThemedText>
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShowFilteredContacts;
+export default DisplayContactListItem;
