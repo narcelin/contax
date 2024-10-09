@@ -44,7 +44,7 @@ const contax = () => {
           <ThemedText type="title">BUTTON</ThemedText>
           {contacts?.map((contact) => (
             <DisplayContactListItem
-              banners={contactBanners}
+              banners={contactBanners} // FIX
               first_name={contact.first_name}
               last_name={contact.last_name}
             />
