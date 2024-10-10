@@ -38,6 +38,11 @@ export default function RootLayout() {
           name="modal"
           options={{ presentation: "fullScreenModal" }}
         />
+        {/* QZX: How do I create mulitple modals with different names? Seem to only be able to use modal named "modal". SideNote: if I wanted to place this modal inside my tabs folder for organizational purposes is that possible? Will I have to create a stack layer inside my tabs? Is that even logical? */}
+        <Stack.Screen
+          name="contactCardModal"
+          options={{ presentation: "fullScreenModal" }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

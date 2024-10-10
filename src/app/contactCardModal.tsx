@@ -14,7 +14,7 @@ export type ThemedShowFilteredContactsProps = {
   some_string?: string;
 };
 
-const Modal = ({ some_string }: ThemedShowFilteredContactsProps) => {
+const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
   const [contact, setContact] = useState<any>(null); // QZX: Need to change any to contact prop | null
 
   //   useEffect(() => {
@@ -48,7 +48,7 @@ const Modal = ({ some_string }: ThemedShowFilteredContactsProps) => {
   return (
     <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">"MODAL"</ThemedText>
+        <ThemedText type="title">"CONTACTCARDMODAL"</ThemedText>
         <Pressable onPress={() => navigation.goBack()}>
           <ThemedText type="title">GO BACK</ThemedText>
         </Pressable>
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Modal;
+export default ContactCardModal;
