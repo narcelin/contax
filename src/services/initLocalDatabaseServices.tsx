@@ -6,7 +6,7 @@ import { ThemedView } from "@/src/components/ThemedView";
 
 import { Pressable } from "react-native";
 
-const schemaSql = `
+const schemaSqlQuery = `
     -- Create Contacts Table
     CREATE TABLE IF NOT EXISTS Contacts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,7 +73,13 @@ const schemaSql = `
     );
     `;
 
-const testData = `
+export const initLocalDatabaseSchema = async () => {
+  console.log("RUNNING: Init Local Database");
+  const db = await SQLite.openDatabaseAsync("contax.db");
+  await db.execAsync(schemaSqlQuery);
+};
+
+const testDataQuery = `
 INSERT INTO Contacts (first_name, last_name, company, birthday) 
 VALUES 
 ('John', 'Doe', 'Acme Inc.', '1990-02-15'),
@@ -142,20 +148,42 @@ VALUES
 (4, 2);  -- Work Colleagues have medium access
 `;
 
-export const initLocalDatabaseSchema = async () => {
-  console.log("Running Init Local Database");
+export const insertExampleData = async () => {
+  console.log("RUNNING: Insert Test Data");
   const db = await SQLite.openDatabaseAsync("contax.db");
-  await db.execAsync(schemaSql);
+  db.execAsync(testDataQuery);
 };
 
-export const insertExampleData = async () => {
-  console.log("Running Insert Test Data");
+const deleteAllDataQuery = `
+  -- Remove all data from ContactGroups
+DELETE FROM ContactGroups;
+
+-- Remove all data from GroupPermissions
+DELETE FROM GroupPermissions;
+
+-- Remove all data from PhoneNumbers
+DELETE FROM PhoneNumbers;
+
+-- Remove all data from Emails
+DELETE FROM Emails;
+
+-- Remove all data from Addresses
+DELETE FROM Addresses;
+
+-- Remove all data from Contacts
+DELETE FROM Contacts;
+
+-- Remove all data from Groups
+DELETE FROM Groups;
+`;
+
+export const deleteAllData = async () => {
   const db = await SQLite.openDatabaseAsync("contax.db");
-  db.execAsync(testData);
+  await db.execAsync(deleteAllDataQuery);
 };
 
 export const printLocalDatabase = async () => {
-  console.log("Running getAllAsync");
+  console.log("RUNNING: getAllAsync");
   const db = await SQLite.openDatabaseAsync("contax.db");
   const firstRow = await db.getAllAsync("SELECT * FROM PhoneNumbers");
   console.log(firstRow);

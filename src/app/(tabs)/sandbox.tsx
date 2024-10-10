@@ -8,17 +8,36 @@ import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
 import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsQuery";
+import { insertExampleData } from "@/src/services/initLocalDatabaseServices";
+import { deleteAllData } from "@/src/services/initLocalDatabaseServices";
+
+const getContactsHandler = async () => {
+  const result = await getContactsAlphabeticalQuery();
+  console.log(result);
+};
+
+const insertExampleDataHandler = async () => {
+  const result = await insertExampleData();
+  console.log(result);
+};
+
+const deleteAllDataHandler = async () => {
+  const result = await deleteAllData();
+  console.log(result);
+};
 
 export default function SandboxScreen() {
-  const onPressHandler = async () => {
-    const result = await getContactsAlphabeticalQuery();
-    console.log(result);
-  };
   return (
     <ParallaxScrollView>
       <ThemedView style={styles.titleContainer}>
-        <Pressable onPress={onPressHandler}>
-          <ThemedText type="title">QUERY</ThemedText>
+        <Pressable onPress={getContactsHandler}>
+          <ThemedText type="title">QUERYY</ThemedText>
+        </Pressable>
+        <Pressable onPress={insertExampleDataHandler}>
+          <ThemedText type="title">INSERT EXAMPLE DATA</ThemedText>
+        </Pressable>
+        <Pressable onPress={deleteAllDataHandler}>
+          <ThemedText type="title">DELETE ALL DATA</ThemedText>
         </Pressable>
       </ThemedView>
     </ParallaxScrollView>
@@ -27,7 +46,7 @@ export default function SandboxScreen() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     gap: 8,
   },

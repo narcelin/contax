@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Image, Platform, Pressable } from "react-native";
-import { Link } from "expo-router";
+import { Link, useFocusEffect } from "expo-router";
 
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
@@ -17,21 +17,43 @@ const contax = () => {
   const [contacts, setContacts] = useState<ContactProps[] | null>(null);
   const [contactBanners, setContactBanners] = useState<string[] | null>(null);
 
-  useEffect(() => {
-    // console.log("USE EFFECT: Fetch Data from Local Database");
+  {
+    // OLD METHOD OF RETREIVING DATA
+    // useEffect(() => {
+    //   // console.log("USE EFFECT: Fetch Data from Local Database");
+    //   // Use an async function within the useEffect
+    //   const fetchData = async () => {
+    //     // Querying data from local SQLite Database
+    //     const contactsAlphabetical = await getContactsAlphabeticalQuery();
+    //     const banners = await getBannersFromQuery(contactsAlphabetical); // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
+    //     setContactBanners(banners);
+    //     setContacts(contactsAlphabetical);
+    //     // console.log(bannerList);
+    //   };
+    //   fetchData();
+    // }, []);
+  }
 
-    // Use an async function within the useEffect
-    const fetchData = async () => {
-      // Querying data from local SQLite Database
-      const contactsAlphabetical = await getContactsAlphabeticalQuery();
-      const banners = await getBannersFromQuery(contactsAlphabetical); // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
+  //QZX: Not sure if this is the right method, but I query local database everytime the screen is focused. This helps with state if for example I add a new contact. May want to link this directly to if there is a change in the database directly somehow
+  useFocusEffect(
+    useCallback(() => {
+      console.log("screen is focused");
+      const fetchData = async () => {
+        // Querying data from local SQLite Database
+        const contactsAlphabetical = await getContactsAlphabeticalQuery();
+        const banners = await getBannersFromQuery(contactsAlphabetical); // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
 
-      setContactBanners(banners);
-      setContacts(contactsAlphabetical);
-      // console.log(bannerList);
-    };
-    fetchData();
-  }, []);
+        setContactBanners(banners);
+        setContacts(contactsAlphabetical);
+        // console.log(bannerList);
+      };
+      fetchData();
+      return () => {
+        console.log("screen is unfocused");
+      };
+    }, [])
+  );
+
   //   const [loading, isLoading] = useState(null); // This can be used for a loading screen if needed
   if (0) {
     //TESTING RETURN
