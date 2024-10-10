@@ -5,21 +5,35 @@ import { StyleSheet, Image, Platform } from "react-native";
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
+import { ContactProps } from "../services/queries/getContactsQuery";
 
 export type ThemedDisplayContactListItemProps = {
-  banners?: string[] | undefined;
-  first_name?: string;
-  last_name?: string;
+  banners?: string[] | null;
+  contacts?: ContactProps[] | null;
 };
 
 const DisplayContactListItem = ({
-  first_name,
-  last_name,
+  banners,
+  contacts,
 }: ThemedDisplayContactListItemProps) => {
   return (
     <ThemedView style={styles.titleContainer}>
-      <ThemedText type="title">{first_name}</ThemedText>
-      <ThemedText type="title">{last_name}</ThemedText>
+      <>
+        {banners?.map((banner, bannerIndex) => {
+          console.log("BANNER: ", banner);
+          const filteredContacts = contacts?.filter(
+            (contact) => contact.first_name[0] == banner[0]
+          );
+          return (
+            <>
+              <ThemedText type="title">{banner}</ThemedText>
+              {filteredContacts?.map((contact) => (
+                <ThemedText type="title">{contact.first_name}</ThemedText>
+              ))}
+            </>
+          );
+        })}
+      </>
     </ThemedView>
   );
 };
@@ -32,7 +46,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   titleContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 8,
   },
 });

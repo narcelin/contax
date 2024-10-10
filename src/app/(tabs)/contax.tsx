@@ -42,20 +42,16 @@ const contax = () => {
         {/* <ThemedText type="title">Explore</ThemedText> */}
         <Pressable onPress={() => console.log(contactBanners, contacts)}>
           <ThemedText type="title">BUTTON</ThemedText>
-          {contacts?.map((contact) => (
-            <DisplayContactListItem
-              banners={contactBanners} // FIX
-              first_name={contact.first_name}
-              last_name={contact.last_name}
-            />
-          ))}
+          <DisplayContactListItem
+            banners={contactBanners}
+            contacts={contacts}
+          />
           {/* {contacts ? (
             <ThemedText>Loaded</ThemedText>
           ) : (
             <ThemedText>Not loaded</ThemedText>
           )} */}
         </Pressable>
-        {/* <DisplayContactListItem first_name="Nicolas" last_name="Arcelin" /> */}
       </ThemedView>
     </ParallaxScrollView>
   );
