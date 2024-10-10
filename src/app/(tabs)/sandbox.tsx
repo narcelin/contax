@@ -7,11 +7,11 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-import { alphabeticalFistThenLastNames } from "@/src/services/queries/getContactsQuery";
+import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsQuery";
 
 export default function SandboxScreen() {
   const onPressHandler = async () => {
-    const result = await alphabeticalFistThenLastNames();
+    const result = await getContactsAlphabeticalQuery();
     console.log(result);
   };
   return (

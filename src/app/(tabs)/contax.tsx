@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Image, Platform, Pressable } from "react-native";
+import { Link } from "expo-router";
 
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
@@ -42,16 +43,18 @@ const contax = () => {
         {/* <ThemedText type="title">Explore</ThemedText> */}
         <Pressable onPress={() => console.log(contactBanners, contacts)}>
           <ThemedText type="title">BUTTON</ThemedText>
-          <DisplayContactListItem
-            banners={contactBanners}
-            contacts={contacts}
-          />
-          {/* {contacts ? (
+        </Pressable>
+        <Link href="/modal">
+          MODAL LINK
+          <ThemedText type="title">MODAL LINK</ThemedText>
+        </Link>
+
+        <DisplayContactListItem banners={contactBanners} contacts={contacts} />
+        {/* {contacts ? (
             <ThemedText>Loaded</ThemedText>
           ) : (
             <ThemedText>Not loaded</ThemedText>
           )} */}
-        </Pressable>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   titleContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 8,
   },
 });

@@ -18,22 +18,20 @@ const DisplayContactListItem = ({
 }: ThemedDisplayContactListItemProps) => {
   return (
     <ThemedView style={styles.titleContainer}>
-      <>
-        {banners?.map((banner, bannerIndex) => {
-          console.log("BANNER: ", banner);
-          const filteredContacts = contacts?.filter(
-            (contact) => contact.first_name[0] == banner[0]
-          );
-          return (
-            <>
-              <ThemedText type="title">{banner}</ThemedText>
-              {filteredContacts?.map((contact) => (
-                <ThemedText type="title">{contact.first_name}</ThemedText>
-              ))}
-            </>
-          );
-        })}
-      </>
+      {banners?.map((banner, bannerIndex) => {
+        console.log("BANNER: ", banner);
+        const filteredContacts = contacts?.filter(
+          (contact) => contact.first_name[0] == banner[0]
+        );
+        return (
+          <>
+            <ThemedText type="title">{banner}</ThemedText>
+            {filteredContacts?.map((contact) => (
+              <ThemedText type="title">{contact.first_name}</ThemedText>
+            ))}
+          </>
+        );
+      })}
     </ThemedView>
   );
 };
