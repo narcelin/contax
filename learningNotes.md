@@ -2,6 +2,8 @@
 
 ## DEV NOTES
 
+- Currently using useEffectFocus will need to link useEffect to changes in database somehow
+
 ### QZX
 
 - QZX comments will be made on issues that will need to be addressed before uploading to app store

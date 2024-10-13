@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet, Image, Platform, Pressable } from "react-native";
+import { StyleSheet, Image, Platform, Pressable, View } from "react-native";
 import { Link, useFocusEffect } from "expo-router";
 
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
@@ -37,6 +38,7 @@ const contax = () => {
   //QZX: Not sure if this is the right method, but I query local database everytime the screen is focused. This helps with state if for example I add a new contact. May want to link this directly to if there is a change in the database directly somehow
   useFocusEffect(
     useCallback(() => {
+      setIsLoading(true);
       console.log("screen is focused");
       const fetchData = async () => {
         // Querying data from local SQLite Database
@@ -49,13 +51,14 @@ const contax = () => {
       };
       fetchData();
       return () => {
+        setIsLoading(false);
         console.log("screen is unfocused");
       };
     }, [])
   );
 
-  //   const [loading, isLoading] = useState(null); // This can be used for a loading screen if needed
-  if (0) {
+  const [isLoading, setIsLoading] = useState(true); // This can be used for a loading screen if needed
+  if (false) {
     //TESTING RETURN
     return (
       <ParallaxScrollView>
@@ -67,6 +70,8 @@ const contax = () => {
   } else {
     return (
       //REAL RETURN
+
+      // QZX: Overrides SectionList effect from displaycontactlistitem component. May need to remove
       <ParallaxScrollView
       //   headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       //   headerImage={
@@ -79,19 +84,17 @@ const contax = () => {
             <ThemedText type="title">BUTTON</ThemedText>
           </Pressable>
           <Link href="/modal">
-            MODAL LINK
             <ThemedText type="title">MODAL LINK</ThemedText>
           </Link>
-
           <DisplayContactListItem
             banners={contactBanners}
             contacts={contacts}
           />
           {/* {contacts ? (
-            <ThemedText>Loaded</ThemedText>
-          ) : (
-            <ThemedText>Not loaded</ThemedText>
-          )} */}
+                <ThemedText>Loaded</ThemedText>
+              ) : (
+                <ThemedText>Not loaded</ThemedText>
+              )} */}
         </ThemedView>
       </ParallaxScrollView>
     );
