@@ -16,7 +16,6 @@ import { ThemedView } from "@/src/components/ThemedView";
 import { ContactProps } from "../services/queries/getContactsQuery";
 
 export type ThemedDisplayContactListItemProps = {
-  banners?: string[] | null;
   contacts?: ContactProps[] | null;
 };
 
@@ -25,47 +24,16 @@ interface GroupedContacts {
 }
 
 const DisplayContactListItem = ({
-  banners,
   contacts,
 }: ThemedDisplayContactListItemProps) => {
-  const navigation = useNavigation<any>(); //QZX: MTI1055 using any definition to resolve modal typeing issue in navigation.navigate("modal"). Real solution will be to type it accordingly. Nullifies the use of typescript.
-
-  // I need to get an array of objects that list formatted like so:
-  // [{title: "Banner", data: [contacts]}] -Think contacts can be an array of objects inside data param
-  {
-    // const convertedContactListForSecitonList = ({
-    //   banners,
-    //   contacts,
-    // }: ThemedDisplayContactListItemProps) => {
-    //   console.log(contacts);
-    //   const grouped = contacts?.reduce(
-    //     (accumulator: GroupedContacts, contact) => {
-    //       const firstLetter = contact.first_name[0].toUpperCase();
-    //       if (!accumulator[firstLetter]) {
-    //         accumulator[firstLetter] = [];
-    //       }
-    //       accumulator[firstLetter].push(contact);
-    //       return accumulator;
-    //     },
-    //     {}
-    //   );
-    //   const sortedKeys = Object.keys(grouped).sort();
-    //   return sortedKeys.map((key) => ({
-    //     title: key,
-    //     data: grouped[key].sort((a, b) => a.name.localeCompare(b.name)),
-    //   }));
-    // };
-  }
+  //QZX: MTI1055 using any definition to resolve modal typeing issue in navigation.navigate("modal"). Real solution will be to type it accordingly. Nullifies the use of typescript.
+  const navigation = useNavigation<any>();
 
   const convertedContactListForSecitonList = (
-    banners: string[] | undefined | null,
     contacts: ContactProps[] | undefined | null
   ) => {
-    // Temp object {banner: "bannerValue", contact: [{contact}'s that first_name[0] == bannerValue]}
-    // loop through banners
-    // Push banners[0] into temp object under TITLE or KEY
-    // Have an array of objects,
-    const grouped = contacts?.reduce<Record<string, ContactProps[]>>( //QZX: What is Record???
+    //QZX: What is Record???
+    const grouped = contacts?.reduce<Record<string, ContactProps[]>>(
       (accumulator, contact, index) => {
         console.log(index);
         // console.log("CONTACT: ", contact);
@@ -92,7 +60,7 @@ const DisplayContactListItem = ({
     return output;
   };
 
-  const sections = convertedContactListForSecitonList(banners, contacts);
+  const sections = convertedContactListForSecitonList(contacts);
   console.log("SECTIONS", sections);
 
   if (true) {
@@ -129,48 +97,6 @@ const DisplayContactListItem = ({
       />
     );
   }
-
-  //LLOTN: Need to review sectionlist component and probably use that to display contacts
-  return (
-    <ParallaxScrollView>
-      <ThemedView style={styles.titleContainer}>
-        {/* <Pressable>
-          <ThemedText>TEST BUTTON</ThemedText>
-        </Pressable> */}
-        {banners?.map((banner, bannerIndex) => {
-          console.log("BANNER: ", banner);
-          const filteredContacts = contacts?.filter(
-            (contact) => contact.first_name[0] == banner[0]
-          );
-          return (
-            <React.Fragment key={bannerIndex}>
-              <ThemedView style={styles.sectionHeader}>
-                <ThemedText type="title" style={styles.sectionHeaderText}>
-                  {banner}
-                </ThemedText>
-              </ThemedView>
-              {filteredContacts?.map((contact, contactIndex) => (
-                <Pressable
-                  key={contactIndex}
-                  onPress={() => {
-                    navigation.navigate("modal", {
-                      contactId: contact.id,
-                    });
-                  }}
-                >
-                  <ThemedView style={styles.itemContainer}>
-                    <ThemedText type="title" style={styles.itemText}>
-                      {contact.first_name} {contact.last_name}
-                    </ThemedText>
-                  </ThemedView>
-                </Pressable>
-              ))}
-            </React.Fragment>
-          );
-        })}
-      </ThemedView>
-    </ParallaxScrollView>
-  );
 };
 
 const styles = StyleSheet.create({

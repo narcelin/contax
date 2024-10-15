@@ -16,7 +16,6 @@ import { ContactProps } from "@/src/services/queries/getContactsQuery";
 
 const contax = () => {
   const [contacts, setContacts] = useState<ContactProps[] | null>(null);
-  const [contactBanners, setContactBanners] = useState<string[] | null>(null);
 
   {
     // OLD METHOD OF RETREIVING DATA
@@ -43,9 +42,8 @@ const contax = () => {
       const fetchData = async () => {
         // Querying data from local SQLite Database
         const contactsAlphabetical = await getContactsAlphabeticalQuery();
-        const banners = await getBannersFromQuery(contactsAlphabetical); // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
+        // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
 
-        setContactBanners(banners);
         setContacts(contactsAlphabetical);
         // console.log(bannerList);
       };
@@ -57,7 +55,8 @@ const contax = () => {
     }, [])
   );
 
-  const [isLoading, setIsLoading] = useState(true); // This can be used for a loading screen if needed
+  // This can be used for a loading screen if needed
+  const [isLoading, setIsLoading] = useState(true);
   if (false) {
     //TESTING RETURN
     return (
@@ -71,32 +70,9 @@ const contax = () => {
     return (
       //REAL RETURN
 
-      // QZX: Overrides SectionList effect from displaycontactlistitem component. May need to remove
-      <ParallaxScrollView
-      //   headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      //   headerImage={
-      //     <Ionicons size={310} name="code-slash" style={styles.headerImage} />
-      //   }
-      >
-        <ThemedView style={styles.titleContainer}>
-          {/* <ThemedText type="title">Explore</ThemedText> */}
-          <Pressable onPress={() => console.log(contactBanners, contacts)}>
-            <ThemedText type="title">BUTTON</ThemedText>
-          </Pressable>
-          <Link href="/modal">
-            <ThemedText type="title">MODAL LINK</ThemedText>
-          </Link>
-          <DisplayContactListItem
-            banners={contactBanners}
-            contacts={contacts}
-          />
-          {/* {contacts ? (
-                <ThemedText>Loaded</ThemedText>
-              ) : (
-                <ThemedText>Not loaded</ThemedText>
-              )} */}
-        </ThemedView>
-      </ParallaxScrollView>
+      <ThemedView style={styles.titleContainer}>
+        <DisplayContactListItem contacts={contacts} />
+      </ThemedView>
     );
   }
 };
