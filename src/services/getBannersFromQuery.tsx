@@ -1,5 +1,5 @@
 import React from "react";
-import { ContactProps } from "./queries/getContactsQuery";
+import { ContactProps } from "./queries/getContactsAlphabeticalQuery";
 
 export const getBannersFromQuery = async (
   filteredQueryResult: ContactProps[] | any

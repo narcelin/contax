@@ -1,13 +1,15 @@
 import { Image, StyleSheet, Pressable, Platform } from "react-native";
 
-import InitLocalDatabase from "@/src/services/initLocalDatabaseServices";
+import InitLocalDatabase, {
+  initLocalDatabaseSchema,
+} from "@/src/services/initLocalDatabaseServices";
 
 import { HelloWave } from "@/src/components/HelloWave";
 import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsQuery";
+import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsAlphabeticalQuery";
 import { insertExampleData } from "@/src/services/initLocalDatabaseServices";
 import { deleteAllData } from "@/src/services/initLocalDatabaseServices";
 
@@ -16,14 +18,22 @@ const getContactsHandler = async () => {
   console.log(result);
 };
 
+const initDatabaseSchema = async () => {
+  console.log("PRESS: INIT DATABASE");
+  const result = await initLocalDatabaseSchema();
+  result;
+};
+
 const insertExampleDataHandler = async () => {
+  console.log("PRESS: INSERT EXAMPLE DATA");
   const result = await insertExampleData();
-  console.log(result);
+  result;
 };
 
 const deleteAllDataHandler = async () => {
   const result = await deleteAllData();
-  console.log(result);
+  result;
+  console.log("RAN DROP ALL TABLES");
 };
 
 export default function SandboxScreen() {
@@ -33,11 +43,14 @@ export default function SandboxScreen() {
         <Pressable onPress={getContactsHandler}>
           <ThemedText type="title">QUERYY</ThemedText>
         </Pressable>
+        <Pressable onPress={initDatabaseSchema}>
+          <ThemedText type="title">INIT DATABASE SCH</ThemedText>
+        </Pressable>
         <Pressable onPress={insertExampleDataHandler}>
           <ThemedText type="title">INSERT EXAMPLE DATA</ThemedText>
         </Pressable>
         <Pressable onPress={deleteAllDataHandler}>
-          <ThemedText type="title">DELETE ALL DATA</ThemedText>
+          <ThemedText type="title">DROP ALL TABLES</ThemedText>
         </Pressable>
       </ThemedView>
     </ParallaxScrollView>

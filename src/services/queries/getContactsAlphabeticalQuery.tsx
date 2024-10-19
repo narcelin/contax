@@ -14,7 +14,7 @@ export const getContactsAlphabeticalQuery = async () => {
   // console.log("Running QUERY: alphabeticalFistThenLastNames");
   const db = await SQLite.openDatabaseAsync("contax.db");
   const query =
-    "SELECT id, first_name, last_name FROM Contacts ORDER BY first_name ASC";
+    "SELECT id, first_name, last_name FROM Contact ORDER BY first_name ASC";
 
   const filteredQueryResult: ContactProps[] = await db.getAllAsync(query);
 

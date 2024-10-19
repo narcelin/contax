@@ -15,35 +15,34 @@ export type ThemedShowFilteredContactsProps = {
 };
 
 const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
-  const [contact, setContact] = useState<any>(null); // QZX: Need to change any to contact prop | null
-
-  //   useEffect(() => {
-  //     // console.log("USE EFFECT: Fetch Data from Local Database");
-
-  //     // Use an async function within the useEffect
-  //     const fetchData = async () => {
-  //       // Querying data from local SQLite Database
-  //       const contactsAlphabetical = await getContactsAlphabeticalQuery();
-  //       const banners = await getBannersFromQuery(contactsAlphabetical); // QZX: What if contactsAlphabetical takes a long time to load? Will this wait for that? How does await acutally work? Is it like a promise or does it actually wait before moving on?
-
-  //       setContactBanners(banners);
-  //       setContacts(contactsAlphabetical);
-  //       // console.log(bannerList);
-  //     };
-  //     fetchData();
-  //   }, []);
+  // console.log("CONTACT Card Modal Loaded");
+  // QZX: Need to change any to contact prop | null
+  const [contact, setContact] = useState<any>(null);
 
   const navigation = useNavigation();
   const params = useLocalSearchParams();
+  console.log("PARAMS :", params);
 
   useEffect(() => {
+    // console.log("USE EFFECT: Contact Card Modal");
     const fetchData = async () => {
-      const contact = await getContactQuery(params.contactId); //Returns an array with an object inside.
+      //Returns an array with an object inside.
+      // console.log("PARAMS: ", params);
+      const contact = await getContactQuery(params.contact_id);
+      // console.log("CONTACT: ", contact[0]);
+
       // Destructures the array. "if thats the correct terminology"
       setContact(contact[0]);
     };
     fetchData();
   }, []);
+
+  const testQueryHandler = async () => {
+    console.log("RUNNING QUERY HANDLER");
+    const queryResult = await getContactQuery(params.contact_id);
+    queryResult;
+    console.log("Query Result: ", queryResult);
+  };
 
   return (
     <ParallaxScrollView>
@@ -52,7 +51,7 @@ const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
         <Pressable onPress={() => navigation.goBack()}>
           <ThemedText type="title">GO BACK</ThemedText>
         </Pressable>
-        <Pressable onPress={() => console.log(contact)}>
+        <Pressable onPress={() => testQueryHandler()}>
           <ThemedText type="title">TEST QUERY</ThemedText>
         </Pressable>
         {contact ? (

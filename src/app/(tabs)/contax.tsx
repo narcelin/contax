@@ -8,11 +8,11 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsQuery";
-import { getBannersFromQuery } from "@/src/services/getBannersFromQuery";
+import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsAlphabeticalQuery";
+import { getBannersFromQuery } from "@/src/services/getBannersFromQuery"; // This is no longer needed. Creating banners from original contacts query in the contactlist component
 
-import DisplayContactListItem from "@/src/components/DisplayContactListItem";
-import { ContactProps } from "@/src/services/queries/getContactsQuery";
+import ContactsSectionList from "@/src/components/ContactsSectionList";
+import { ContactProps } from "@/src/services/queries/getContactsAlphabeticalQuery";
 
 const contax = () => {
   const [contacts, setContacts] = useState<ContactProps[] | null>(null);
@@ -37,7 +37,6 @@ const contax = () => {
   //QZX: Not sure if this is the right method, but I query local database everytime the screen is focused. This helps with state if for example I add a new contact. May want to link this directly to if there is a change in the database directly somehow
   useFocusEffect(
     useCallback(() => {
-      setIsLoading(true);
       console.log("screen is focused");
       const fetchData = async () => {
         // Querying data from local SQLite Database
@@ -48,33 +47,15 @@ const contax = () => {
         // console.log(bannerList);
       };
       fetchData();
-      return () => {
-        setIsLoading(false);
-        console.log("screen is unfocused");
-      };
     }, [])
   );
 
-  // This can be used for a loading screen if needed
-  const [isLoading, setIsLoading] = useState(true);
-  if (false) {
-    //TESTING RETURN
-    return (
-      <ParallaxScrollView>
-        <ThemedView>
-          <ThemedText>TRUE</ThemedText>
-        </ThemedView>
-      </ParallaxScrollView>
-    );
-  } else {
-    return (
-      //REAL RETURN
-
-      <ThemedView style={styles.titleContainer}>
-        <DisplayContactListItem contacts={contacts} />
-      </ThemedView>
-    );
-  }
+  // QZX: Might need a loading screen
+  return (
+    <ThemedView style={styles.titleContainer}>
+      <ContactsSectionList contacts={contacts} />
+    </ThemedView>
+  );
 };
 
 const styles = StyleSheet.create({
