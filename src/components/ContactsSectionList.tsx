@@ -6,7 +6,7 @@ import { Link } from "expo-router";
 
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
-import { ContactProps } from "../services/queries/getContactsAlphabeticalQuery";
+import { ContactProps } from "../services/queries/getContactsIn_AlphabeticalQuery";
 
 export type ThemedContactsSectionListProps = {
   contacts?: ContactProps[] | null;

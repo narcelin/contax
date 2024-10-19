@@ -9,7 +9,7 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsAlphabeticalQuery";
+import { getContactsAlphabeticalQuery } from "@/src/services/queries/getContactsIn_AlphabeticalQuery";
 import { insertExampleData } from "@/src/services/initLocalDatabaseServices";
 import { deleteAllData } from "@/src/services/initLocalDatabaseServices";
 

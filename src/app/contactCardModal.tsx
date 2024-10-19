@@ -8,7 +8,10 @@ import ParallaxScrollView from "@/src/components/ParallaxScrollView";
 import { ThemedText } from "@/src/components/ThemedText";
 import { ThemedView } from "@/src/components/ThemedView";
 
-import { getContactQuery } from "../services/queries/getContactQuery";
+import {
+  getTestQuery,
+  getContactWith_PhoneNumbers_Email_Address,
+} from "../services/queries/getContactWith_PhoneNumbers_Email_Address";
 
 export type ThemedShowFilteredContactsProps = {
   some_string?: string;
@@ -28,7 +31,9 @@ const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
     const fetchData = async () => {
       //Returns an array with an object inside.
       // console.log("PARAMS: ", params);
-      const contact = await getContactQuery(params.contact_id);
+      const contact = await getContactWith_PhoneNumbers_Email_Address(
+        params.contact_id
+      );
       // console.log("CONTACT: ", contact[0]);
 
       // Destructures the array. "if thats the correct terminology"
@@ -38,8 +43,8 @@ const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
   }, []);
 
   const testQueryHandler = async () => {
-    console.log("RUNNING QUERY HANDLER");
-    const queryResult = await getContactQuery(params.contact_id);
+    console.log("RUNNING TEST QUERY HANDLER");
+    const queryResult = await getTestQuery(params.contact_id);
     queryResult;
     console.log("Query Result: ", queryResult);
   };

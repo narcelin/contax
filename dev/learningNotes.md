@@ -11,6 +11,9 @@
 
 - Currently using useEffectFocus will need to link useEffect to changes in database somehow
 
+- When dropping Database. Contax still shows previous data. Is this a cache issue?
+  - Should show nothing since the databases are all dropped. Technically this wont happen. Databases wont be dropped but info deleted. WHAT IF I decide to change a db table? Then may not update properly until it is restarted
+
 ### Questions for Friends
 
 - How should I manage state in my application?

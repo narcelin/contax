@@ -9,7 +9,7 @@ export interface ContactProps {
   last_name: string;
 }
 
-export const getContactsAlphabeticalQuery = async () => {
+export const getContactsIn_AlphabeticalQuery = async () => {
   // Filtered Query. In this case alphabetical.
   // console.log("Running QUERY: alphabeticalFistThenLastNames");
   const db = await SQLite.openDatabaseAsync("contax.db");
