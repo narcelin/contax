@@ -13,18 +13,14 @@ import {
   getContactWith_PhoneNumbers_Email_Address,
 } from "../services/queries/getContactWith_PhoneNumbers_Email_Address";
 
-export type ThemedShowFilteredContactsProps = {
-  some_string?: string;
-};
-
-const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
+const ContactCardModal = () => {
   // console.log("CONTACT Card Modal Loaded");
   // QZX: Need to change any to contact prop | null
   const [contact, setContact] = useState<any>(null);
 
   const navigation = useNavigation();
   const params = useLocalSearchParams();
-  console.log("PARAMS :", params);
+  // console.log("PARAMS :", params);
 
   useEffect(() => {
     // console.log("USE EFFECT: Contact Card Modal");
@@ -38,6 +34,17 @@ const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
 
       // Destructures the array. "if thats the correct terminology"
       setContact(contact[0]);
+
+      const parsedResult = JSON.parse(JSON.stringify(contact));
+
+      // Step 2: Parse the nested JSON strings (Addresses, email_addresses, phone_numbers)
+      parsedResult.forEach((contact: any) => {
+        contact.Addresses = JSON.parse(contact.Addresses); // Parse Addresses JSON string
+        contact.email_addresses = JSON.parse(contact.email_addresses); // Parse email_addresses
+        contact.phone_numbers = JSON.parse(contact.phone_numbers); // Parse phone_numbers
+      });
+
+      console.log(parsedResult[0]);
     };
     fetchData();
   }, []);
@@ -59,6 +66,7 @@ const ContactCardModal = ({ some_string }: ThemedShowFilteredContactsProps) => {
         <Pressable onPress={() => testQueryHandler()}>
           <ThemedText type="title">TEST QUERY</ThemedText>
         </Pressable>
+        {/* QZX: Is this proper method for a quick loading screen */}
         {contact ? (
           <>
             <ThemedText type="title">Contact ID: {contact.id}</ThemedText>

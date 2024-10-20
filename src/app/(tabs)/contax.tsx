@@ -19,7 +19,8 @@ const contax = () => {
   //QZX: Not sure if this is the right method, but I query local database everytime the screen is focused. This helps with state if for example I add a new contact. May want to link this directly to if there is a change in the database directly somehow
   useFocusEffect(
     useCallback(() => {
-      console.log("screen is focused");
+      // console.log("screen is focused");
+      // QZX: May want to move query into ContactsSectionList component. Will useFocus re-render the new state if query is inside ContactsSectionList?
       const fetchData = async () => {
         // Querying data from local SQLite Database
         const contactsAlphabetical = await getContactsIn_AlphabeticalQuery();
@@ -33,11 +34,7 @@ const contax = () => {
   );
 
   // QZX: Might need a loading screen
-  return (
-    <ThemedView style={styles.titleContainer}>
-      <ContactsSectionList contacts={contacts} />
-    </ThemedView>
-  );
+  return <ContactsSectionList contacts={contacts} />;
 };
 
 const styles = StyleSheet.create({

@@ -2,11 +2,6 @@
 
 ## UPDATES
 
-### 10-19
-
-- Changed passing contact prop from contax -> contactModal TO passing contact_id and calling a query to localSQLite usiing contact_id
-  - This was done because a full query of joining of all the tables that have that contact information is already going to be called and to avoid json.stringify -> parsing it which makes the code more legible in my eyes
-
 ## DEV NOTES
 
 - Currently using useEffectFocus will need to link useEffect to changes in database somehow

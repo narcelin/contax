@@ -59,7 +59,7 @@ WHERE
   // QZX: Returns an array with a single object inside. May want to use getFirstAsync()
   const getContactWith_PhoneNumbers_Email_AddressResult: ContactProps[] =
     await db.getAllAsync(query);
-  console.log(getContactWith_PhoneNumbers_Email_AddressResult);
+  // console.log(getContactWith_PhoneNumbers_Email_AddressResult);
 
   return getContactWith_PhoneNumbers_Email_AddressResult;
 };
