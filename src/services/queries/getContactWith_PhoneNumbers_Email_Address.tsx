@@ -9,8 +9,7 @@ export interface ContactProps {
 
 export const getTestQuery = async (contactId: string | string[]) => {
   const db = await SQLite.openDatabaseAsync("contax.db");
-  const query = `SELECT Contacts.*, PhoneNumbers.phone_number, PhoneNumbers.type FROM Contacts LEFT JOIN PhoneNumbers ON contacts.id = PhoneNumbers.contact_id WHERE Contacts.id=${contactId}`;
-  const testQUery2 = `SELECT 
+  const query = `SELECT 
     Contact.*, 
     (SELECT json_group_array(json_object('type', PhoneNumber.type, 'number', PhoneNumber.phone_number)) 
      FROM PhoneNumber 
@@ -28,7 +27,7 @@ WHERE
 `;
 
   // QZX: Returns an array with a single object inside. May want to use getFirstAsync()
-  const getTestQueryResults: ContactProps[] = await db.getAllAsync(testQUery2);
+  const getTestQueryResults: ContactProps[] = await db.getAllAsync(query);
   // console.log(getTestQueryResults);
 
   return getTestQueryResults;

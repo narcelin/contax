@@ -1,4 +1,26 @@
-# Welcome to your Expo app 👋
+# Welcome to Contax (Under Construction)
+
+A new way of keeping track of your connections
+
+## Initalizing the application
+
+1. Clone the git repository onto your personal device
+
+2. Install dependencies
+
+3. Start the application
+   `npx expo start` OR `npm run start`
+
+4. Scan QR code if you would like to use your personal device or run it in a simulator
+   Developed for IOS but should also run on Android (not tested)
+   For more info please see expo documentation or reach out to me personally [Expo Docs](https://docs.expo.dev/)
+
+## UPDATES
+
+Currently attempting to create a similar application to the IOS contacts app with clean effecient code
+FRONTEND (not started)
+
+# BOILERPLATE EXPO README BELOW (Welcome to your Expo app) 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 

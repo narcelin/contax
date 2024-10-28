@@ -25,26 +25,23 @@ const ContactCardModal = () => {
   useEffect(() => {
     // console.log("USE EFFECT: Contact Card Modal");
     const fetchData = async () => {
-      //Returns an array with an object inside.
-      // console.log("PARAMS: ", params);
-      const contact = await getContactWith_PhoneNumbers_Email_Address(
-        params.contact_id
+      const getContactWith_QueryResult =
+        await getContactWith_PhoneNumbers_Email_Address(params.contact_id);
+
+      // Converting JSON string to JSON object
+      const parsedResult = JSON.parse(
+        JSON.stringify(getContactWith_QueryResult)
       );
-      // console.log("CONTACT: ", contact[0]);
-
-      // Destructures the array. "if thats the correct terminology"
-      setContact(contact[0]);
-
-      const parsedResult = JSON.parse(JSON.stringify(contact));
-
-      // Step 2: Parse the nested JSON strings (Addresses, email_addresses, phone_numbers)
+      // Parse the nested JSON strings (Addresses, email_addresses, phone_numbers)
       parsedResult.forEach((contact: any) => {
         contact.Addresses = JSON.parse(contact.Addresses); // Parse Addresses JSON string
         contact.email_addresses = JSON.parse(contact.email_addresses); // Parse email_addresses
         contact.phone_numbers = JSON.parse(contact.phone_numbers); // Parse phone_numbers
       });
 
-      console.log(parsedResult[0]);
+      // Destructuring arrays outter layer and setting the parsed JSON object into contact state
+      setContact(parsedResult[0]);
+      console.log(parsedResult[0].Addresses[0].city);
     };
     fetchData();
   }, []);
@@ -53,7 +50,7 @@ const ContactCardModal = () => {
     console.log("RUNNING TEST QUERY HANDLER");
     const queryResult = await getTestQuery(params.contact_id);
     queryResult;
-    console.log("Query Result: ", queryResult);
+    console.log("TEST Query Result: ", queryResult[0]);
   };
 
   return (
@@ -74,6 +71,13 @@ const ContactCardModal = () => {
               First Name: {contact.first_name}
             </ThemedText>
             <ThemedText type="title">Last Name: {contact.last_name}</ThemedText>
+            {Object.entries(contact.phone_numbers[0]).map(([key, value]) => {
+              return (
+                <ThemedText key={key + value}>
+                  {key}: {value}
+                </ThemedText>
+              );
+            })}
           </>
         ) : (
           <ThemedText>Loading</ThemedText>
