@@ -2,6 +2,14 @@
 
 A new way of keeping track of your connections
 
+Current development views which work with SQLite local storage
+
+<div style="display: flex; gap: 10px">
+   <img src="./assets/images/screens/Simulator Screen Shot - iPhone 14 Plus - 2024-10-28 at 10.58.34.png" alt="" width="200">
+   
+   <img src="./assets/images/screens/Simulator Screen Shot - iPhone 14 Plus - 2024-10-28 at 10.59.42.png" alt="" width="200">
+</div>
+
 ## Initalizing the application
 
 1. Clone the git repository onto your personal device
