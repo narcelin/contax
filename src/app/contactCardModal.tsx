@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Image, Platform, Pressable } from "react-native";
 
@@ -25,6 +26,12 @@ const ContactCardModal = () => {
   useEffect(() => {
     // console.log("USE EFFECT: Contact Card Modal");
     const fetchData = async () => {
+      // Artificial Delay
+      const sleep = (ms: number) =>
+        new Promise((resolve) => setTimeout(resolve, ms));
+      const delayTime = 2000; // 2 seconds for example
+      await sleep(delayTime);
+
       const getContactWith_QueryResult =
         await getContactWith_PhoneNumbers_Email_Address(params.contact_id);
 
@@ -55,32 +62,63 @@ const ContactCardModal = () => {
 
   return (
     <ParallaxScrollView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">"CONTACTCARDMODAL"</ThemedText>
-        <Pressable onPress={() => navigation.goBack()}>
-          <ThemedText type="title">GO BACK</ThemedText>
-        </Pressable>
-        <Pressable onPress={() => testQueryHandler()}>
-          <ThemedText type="title">TEST QUERY</ThemedText>
-        </Pressable>
+      {/* <Pressable onPress={() => testQueryHandler()}>
+        <ThemedText type="title">TEST QUERY</ThemedText>
+      </Pressable> */}
+      <ThemedView style={styles.container}>
         {/* QZX: Is this proper method for a quick loading screen */}
         {contact ? (
           <>
-            <ThemedText type="title">Contact ID: {contact.id}</ThemedText>
-            <ThemedText type="title">
-              First Name: {contact.first_name}
-            </ThemedText>
-            <ThemedText type="title">Last Name: {contact.last_name}</ThemedText>
-            {Object.entries(contact.phone_numbers[0]).map(([key, value]) => {
-              return (
-                <ThemedText key={key + value}>
-                  {key}: {value}
+            <ThemedView style={styles.hero} transparentColor={true}>
+              <ThemedView style={styles.back_btn} transparentColor={true}>
+                <Pressable onPress={() => navigation.goBack()}>
+                  <ThemedText type="subtitle">GO BACK</ThemedText>
+                </Pressable>
+              </ThemedView>
+              <ThemedView style={styles.hero_info} transparentColor={true}>
+                <ThemedText type="subtitle">
+                  Contact ID: {contact.id}
                 </ThemedText>
-              );
-            })}
+                <ThemedText type="subtitle">
+                  First Name: {contact.first_name}
+                </ThemedText>
+                <ThemedText type="subtitle">
+                  Last Name: {contact.last_name}
+                </ThemedText>
+              </ThemedView>
+              <ThemedView transparentColor={true}>
+                <ThemedText type="subtitle">
+                  Relationship:
+                  {contact.relationship ? contact.relationship : "*MISSING*"}
+                </ThemedText>
+              </ThemedView>
+            </ThemedView>
+
+            <ThemedView>
+              <ThemedView>
+                <ThemedView>
+                  <ThemedText>ICON</ThemedText>
+                </ThemedView>
+                {Object.entries(contact.phone_numbers[0]).map(
+                  ([key, value]) => {
+                    return (
+                      <ThemedText key={key + value}>
+                        {key}: {value}
+                      </ThemedText>
+                    );
+                  }
+                )}
+              </ThemedView>
+            </ThemedView>
           </>
         ) : (
-          <ThemedText>Loading</ThemedText>
+          <>
+            <ThemedText>Loading</ThemedText>
+            <ThemedText>Loading</ThemedText>
+            <ThemedText>Loading</ThemedText>
+            <ThemedText>Loading</ThemedText>
+            <ThemedText>Loading</ThemedText>
+          </>
         )}
       </ThemedView>
     </ParallaxScrollView>
@@ -88,10 +126,13 @@ const ContactCardModal = () => {
 };
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    display: "flex",
     flexDirection: "column",
-    gap: 8,
+    backgroundColor:
+      "linear-gradient(90deg, rgba(111,177,127,1) 0%, rgba(154,173,89,1) 100%)",
   },
+  hero: { display: "flex", flexDirection: "column" },
 });
 
 export default ContactCardModal;
