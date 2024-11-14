@@ -71,7 +71,7 @@ const ContactCardModal = () => {
         {contact ? (
           <>
             {/* Hero Section */}
-            <ThemedView style={styles.hero} transparentBackgroundColor={true}>
+            <ThemedView style={styles.hero}>
               <Pressable onPress={() => navigation.goBack()}>
                 <ThemedText type="subtitle">
                   <Ionicons
@@ -82,14 +82,12 @@ const ContactCardModal = () => {
                 </ThemedText>
               </Pressable>
               <ThemedView
-                transparentBackgroundColor={true}
                 style={{
                   borderWidth: 2,
                   flexDirection: "row",
                 }}
               >
                 <ThemedView
-                  transparentBackgroundColor={true}
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
@@ -100,13 +98,11 @@ const ContactCardModal = () => {
                   <ThemedText>Profile Image</ThemedText>
                 </ThemedView>
                 <ThemedView
-                  transparentBackgroundColor={true}
                   style={{
                     flex: 2,
                   }}
                 >
                   <ThemedView
-                    transparentBackgroundColor={true}
                     style={{
                       alignItems: "center",
                       justifyContent: "center",
@@ -117,7 +113,6 @@ const ContactCardModal = () => {
                     </ThemedText>
                   </ThemedView>
                   <ThemedView
-                    transparentBackgroundColor={true}
                     style={{
                       alignItems: "center",
                       justifyContent: "center",
@@ -129,7 +124,6 @@ const ContactCardModal = () => {
                     <ThemedText>Company Name, Company Title</ThemedText>
                   </ThemedView>
                   <ThemedView
-                    transparentBackgroundColor={true}
                     style={{
                       alignItems: "center",
                       justifyContent: "space-around",
@@ -143,7 +137,6 @@ const ContactCardModal = () => {
                 </ThemedView>
               </ThemedView>
               <ThemedView
-                transparentBackgroundColor={true}
                 style={{
                   justifyContent: "space-around",
                   flexDirection: "row",
@@ -184,10 +177,7 @@ const ContactCardModal = () => {
               </ThemedView>
 
               {/* Go Back Button Container */}
-              <ThemedView
-                style={styles.back_btn}
-                transparentBackgroundColor={true}
-              ></ThemedView>
+              <ThemedView style={styles.back_btn}></ThemedView>
             </ThemedView>
 
             {/* Information sections. Phone #, Address, etc */}
@@ -225,16 +215,10 @@ const ContactCardModal = () => {
                     postal_code: string;
                   }) => (
                     <ContactInfoDisplay title={data.type}>
-                      <ThemedView
-                        style={{ paddingHorizontal: 10 }}
-                        transparentBackgroundColor={true}
-                      >
+                      <ThemedView style={{ paddingHorizontal: 10 }}>
                         <ThemedText>{data.street}</ThemedText>
                         <ThemedText>{data.city} </ThemedText>
-                        <ThemedView
-                          style={{ flexDirection: "row" }}
-                          transparentBackgroundColor={true}
-                        >
+                        <ThemedView style={{ flexDirection: "row" }}>
                           <ThemedText>{data.state}, </ThemedText>
                           <ThemedText>{data.postal_code}</ThemedText>
                         </ThemedView>

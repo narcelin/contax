@@ -57,6 +57,10 @@ https://react.dev/learn/managing-state
 
 ## GIT
 
+### Best Practice
+
+- Do not resue old branches. Once merge consider them as dead. Create new branch even if it fits into the old branch
+
 ### Basic git cli
 
 - git add .
@@ -64,3 +68,17 @@ https://react.dev/learn/managing-state
 - git push
 - git checkout -b <Branch Name>
 - git branch -d <Branch to Delete>
+- git merge <Branch Name> # Will merge exisitng branch with named branch
+
+#### Git Nomenclature
+
+[GREAT Resource for Branch Nomenclature](https://stackoverflow.com/questions/273695/what-are-some-examples-of-commonly-used-practices-for-naming-git-branches)
+
+Create tokens and use / to separate it
+Token list:
+
+- wip: Works in progress
+- feat: Feature
+- refa: Refactore. Reorganizing without changing functionality
+- bug: Bug fix
+- junk: Throwaway branch

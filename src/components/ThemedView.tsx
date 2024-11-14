@@ -12,7 +12,7 @@ export function ThemedView({
   style,
   lightColor,
   darkColor,
-  transparentBackgroundColor, // Avoids this component to override parents backgroundColor
+  transparentBackgroundColor = true, // Avoids this component to override parents backgroundColor
   ...otherProps
 }: ThemedViewProps) {
   const backgroundColor = transparentBackgroundColor
