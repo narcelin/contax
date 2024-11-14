@@ -34,7 +34,14 @@ const contax = () => {
   );
 
   // QZX: Might need a loading screen
-  return <ContactsSectionList contacts={contacts} />;
+  return (
+    <ThemedView
+      transparentBackgroundColor={false}
+      style={{ minHeight: "100%" }}
+    >
+      <ContactsSectionList contacts={contacts} />
+    </ThemedView>
+  );
 };
 
 const styles = StyleSheet.create({
